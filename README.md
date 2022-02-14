@@ -48,7 +48,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
 #import <AVFoundation/AVFoundation.h>
 ```
 
-- Navigate to the function ```rb- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions``` and add replace the following code:
+- Navigate to the function ```- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions``` and add replace the following code:
 
 ```rb
  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
