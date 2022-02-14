@@ -89,19 +89,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
 - 
 ### Android
 
-- Add maven source to repositories in `android/build.gradle`
-- [Enables multiDex](https://developer.android.com/studio/build/multidex).
-- [Example](https://github.com/manse/react-native-brightcove-player/commit/337450274a0c7ed3b8de890837e60949e6df1db0)
-
-```gradle
-allprojects {
-  repositories {
-      maven {
-          url 'http://repo.brightcove.com/releases'
-      }
-  }
-}
-```
+- TO DO
 
 ## API
 
