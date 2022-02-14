@@ -48,7 +48,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
 #import <AVFoundation/AVFoundation.h>
 ```
 
-- Navigate to the function '(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions' and add replace the following code:
+- Navigate to the function ```rb- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions``` and add replace the following code:
 
 ```rb
  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -57,7 +57,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
-  ```rb
+  ```
   with this:
   ```rb
   NSError * error = nil;
@@ -82,7 +82,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
-  ```rb
+  ```
   
 - Add all the configurations required for google cast as mentioned in the documentation at https://developers.google.com/cast/docs/ios_sender
 
