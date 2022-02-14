@@ -1,6 +1,5 @@
 # React Native Brightcove Player
 
-<img src="https://user-images.githubusercontent.com/443965/58468251-2e0a5b00-8178-11e9-87b7-0acd15b750ba.jpg" width="500">
 
 - A React Native implementation of Brightcove Player SDK.
 - Supported Features
@@ -11,7 +10,7 @@
 
 ## Supported Version
 
-- iOS 10 >=
+- iOS 11 >=
 - Android 5.0 >=
 - Brightcove SDK 6.x
 
