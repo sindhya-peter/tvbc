@@ -46,10 +46,10 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
 ```rb
 #import <GoogleCast/GoogleCast.h>
 #import <AVFoundation/AVFoundation.h>
-
-```rb
+```
 
 - Navigate to the function '(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions' and add replace the following code:
+
 ```rb
  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
