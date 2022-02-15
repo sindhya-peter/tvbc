@@ -89,7 +89,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
 - 
 ### Android
 
-- In project/build.gradle file make changes 
+- In `project/build.gradle` file make changes 
 ```rb
 
   buildscript {
@@ -98,13 +98,13 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
         minSdkVersion = 21
         compileSdkVersion = 32
         targetSdkVersion = 32
-        ndkVersion = "21.4.7075529"
-        androidXCore = "1.6.0"
+        ndkVersion = "21.4.7075529"  //Add this line
+        androidXCore = "1.6.0"         //Add this line
 
     }
     repositories {
-        google()
-        mavenCentral()
+        google()          //Add this line
+        mavenCentral()   //Add this line
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.2.0")
@@ -115,6 +115,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
     
   allprojects {
     repositories {
+     //Add this block
        mavenLocal()
        maven {
             url 'https://repo.brightcove.com/releases'
@@ -138,10 +139,11 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
         google()
         jcenter()
         maven { url 'https://www.jitpack.io' }
+    //Add this block    
     }
   }
 ```
-- Then in AndroidManifest.xml file 
+- Then in `AndroidManifest.xml` file 
 
 - Add Following Permissions
 
@@ -156,7 +158,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
         android:required="true" >
     </uses-feature>
 ```
-- Then add following lines above </application> tag
+- Then add following lines above `</application>` tag
 
 ```rb
 
@@ -188,7 +190,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
             android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />
             
 ```
-- Then add picture in piture support to the Activity
+- Then add picture in piture support to the `Activity`
 ```rb
         android:supportsPictureInPicture="true"
         android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
@@ -200,7 +202,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
              android:largeHeap="true"
     ...
 ```
-in <application> Tag.
+in `<application>` Tag.
 ## API
 
 ### BrightcovePlayer
