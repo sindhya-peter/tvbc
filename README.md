@@ -89,8 +89,118 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
 - 
 ### Android
 
-- TO DO
+- In project/build.gradle file make changes 
+```rb
 
+  buildscript {
+    ext {
+        buildToolsVersion = "32.0.0"
+        minSdkVersion = 21
+        compileSdkVersion = 32
+        targetSdkVersion = 32
+        ndkVersion = "21.4.7075529"
+        androidXCore = "1.6.0"
+
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:4.2.0")
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+ }
+    
+  allprojects {
+    repositories {
+       mavenLocal()
+       maven {
+            url 'https://repo.brightcove.com/releases'
+                    allowInsecureProtocol = true
+        }
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url("$rootDir/../node_modules/react-native/android")
+        }
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
+        mavenCentral {
+            // We don't want to fetch react-native from Maven Central as there are
+            // older versions over there.
+            content {
+                excludeGroup "com.facebook.react"
+            }
+        }
+        google()
+        jcenter()
+        maven { url 'https://www.jitpack.io' }
+    }
+  }
+```
+- Then in AndroidManifest.xml file 
+
+- Add Following Permissions
+
+```rb
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="true" >
+    </uses-feature>
+```
+- Then add following lines above </application> tag
+
+```rb
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+            android:value="com.brightcove.cast.DefaultOptionsProvider" />
+
+        <activity
+            android:name="com.brightcove.cast.DefaultExpandedControllerActivity"
+            android:label="@string/app_name"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.BrightcoveCast"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="com.brightcove.cast.DefaultOptionsProvider.EXPANDED_CONTROLLER_ACTIVITY_CLASS_NAME"
+            android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />
+        <meta-data
+            android:name="com.brightcove.cast.DefaultOptionsProvider.NOTIFICATION_TARGET_ACTIVITY_CLASS_NAME"
+            android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />
+            
+```
+- Then add picture in piture support to the Activity
+```rb
+        android:supportsPictureInPicture="true"
+        android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+```
+- Then add 
+```rb
+    <application
+    ...
+             android:largeHeap="true"
+    ...
+```
+in <application> Tag.
 ## API
 
 ### BrightcovePlayer
