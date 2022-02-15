@@ -190,7 +190,7 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
             android:value="com.brightcove.cast.DefaultExpandedControllerActivity" />
             
 ```
-- Then add picture in piture support to the `Activity`
+- Then add picture in picture support to an `<activity>`
 ```rb
         android:supportsPictureInPicture="true"
         android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
