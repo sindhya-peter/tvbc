@@ -84,9 +84,39 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
   ```
   
 - Add all the configurations required for google cast as mentioned in the documentation at https://developers.google.com/cast/docs/ios_sender
+- Select Info file (Info.plist) from the project navigator. Right click and select open as > source code.
+- Add the following values inside the main ```<dict>``` tag:
+  
+  ```rb
+  <key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>${PRODUCT_NAME} uses the local network to discover Cast-enabled devices on your WiFi network.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>${PRODUCT_NAME} uses Bluetooth to discover nearby Cast devices.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_googlecast._tcp</string>
+		<string>4F8B3483._googlecast._tcp</string>
+	</array>
+  ```
+  <img width="659" alt="Screenshot 2022-02-17 at 12 44 47 AM" src="https://user-images.githubusercontent.com/28964397/154343929-b74355e1-9adf-43e4-b67b-4c149aa236f8.png">
 
+ 
+ - Select target from the project and targets list > add capability > select Background modes from the pop up list and enable 'Audio, airplay and picture in picture'
+ <img width="1237" alt="Screenshot 2022-02-17 at 1 00 29 AM" src="https://user-images.githubusercontent.com/28964397/154343409-bffaad64-1ba2-4fca-8150-5da07e62eadc.png">
 
-- 
+ - Select project from project navigator, right click > new file > ios > scroll down to resource section > select property list and name it as projectname.entitlements. Eg: if the project is playerdemo, name it as playerdemo.entitlements
+ - Right click the added file and open as source code. Replace the ```<dict/> ``` with 
+
+```rb
+<dict>
+	<key>com.apple.developer.networking.wifi-info</key>
+	<true/>
+</dict>
+```
+
+ 
 ### Android
 
 - In `project/build.gradle` file make changes 
@@ -203,85 +233,6 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
     ...
 ```
 in `<application>` Tag.
-
-- In `app/build.gradle` add this under  `dependencies`
-
-```rb
-  implementation 'androidx.work:work-runtime-ktx:2.7.0'
-  implementation "com.brightcove.player:android-cast-plugin:6.16.0"
-
-```
-- Then in `MainActivity.java` add this 
-- imports
-```rb
-import com.facebook.react.ReactActivity;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import com.brightcove.cast.DefaultSessionManagerListener;
-import com.brightcove.cast.GoogleCastComponent;
-import com.brightcove.cast.model.SplashScreen;
-import com.brightcove.cast.util.BrightcoveChannelUtil;
-import com.brightcove.player.pictureinpicture.PictureInPictureManager;
-import com.facebook.react.ReactActivity;
-import com.google.android.gms.cast.framework.CastButtonFactory;
-import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.Session;
-
-```
-- Methods
-```rb
-@Override
-  protected void onCreate(Bundle savedInstanceState) {
-    //Intent i = new Intent(MainActivity.this,PlayerActivity.class);
-   // startActivity(i);
-    // configureThumbnailScrubber(baseVideoView);
-    CastContext castContext = CastContext.getSharedInstance(MainActivity.this);
-    if (castContext != null) {
-      castContext.getSessionManager().addSessionManagerListener(new DefaultSessionManagerListener() {
-        @Override
-        public void onSessionStarted(Session castSession, String s) {
-          super.onSessionStarted(castSession, s);
-          String src = "https://dev.acquia.com/sites/default/files/blog/brightcove-logo-horizontal-grey-new.png";
-          BrightcoveChannelUtil.castSplashScreen((CastSession) castSession, new SplashScreen(src));
-        }
-      });
-    }
-
-    super.onCreate(savedInstanceState);
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-
-  }
-
-  @Override
-  public void recreate() {
-    super.recreate();
-
-  }
-
-  @Override
-  public void onBackPressed() {
-  //  super.onBackPressed();
-    int orientation = getResources().getConfiguration().orientation;
-
-    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-      recreate();
-
-    } else {
-      super.onBackPressed();
-    }
-  }
-```
 ## API
 
 ### BrightcovePlayer
