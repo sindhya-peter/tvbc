@@ -206,14 +206,14 @@ in `<application>` Tag.
 
 - In `app/build.gradle` add this under  `dependencies`
 
-```
+```rb
   implementation 'androidx.work:work-runtime-ktx:2.7.0'
   implementation "com.brightcove.player:android-cast-plugin:6.16.0"
 
 ```
 - Then in `MainActivity.java` add this 
 - imports
-```
+```rb
 import com.facebook.react.ReactActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -235,7 +235,7 @@ import com.google.android.gms.cast.framework.Session;
 
 ```
 - Methods
-```
+```rb
 @Override
   protected void onCreate(Bundle savedInstanceState) {
     //Intent i = new Intent(MainActivity.this,PlayerActivity.class);
