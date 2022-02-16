@@ -203,6 +203,85 @@ Once installation is completed, open project_name.xcworkspace file from ios dire
     ...
 ```
 in `<application>` Tag.
+
+- In `app/build.gradle` add this under  `dependencies`
+
+```
+  implementation 'androidx.work:work-runtime-ktx:2.7.0'
+  implementation "com.brightcove.player:android-cast-plugin:6.16.0"
+
+```
+- Then in `MainActivity.java` add this 
+- imports
+```
+import com.facebook.react.ReactActivity;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import com.brightcove.cast.DefaultSessionManagerListener;
+import com.brightcove.cast.GoogleCastComponent;
+import com.brightcove.cast.model.SplashScreen;
+import com.brightcove.cast.util.BrightcoveChannelUtil;
+import com.brightcove.player.pictureinpicture.PictureInPictureManager;
+import com.facebook.react.ReactActivity;
+import com.google.android.gms.cast.framework.CastButtonFactory;
+import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.cast.framework.CastSession;
+import com.google.android.gms.cast.framework.Session;
+
+```
+- Methods
+```
+@Override
+  protected void onCreate(Bundle savedInstanceState) {
+    //Intent i = new Intent(MainActivity.this,PlayerActivity.class);
+   // startActivity(i);
+    // configureThumbnailScrubber(baseVideoView);
+    CastContext castContext = CastContext.getSharedInstance(MainActivity.this);
+    if (castContext != null) {
+      castContext.getSessionManager().addSessionManagerListener(new DefaultSessionManagerListener() {
+        @Override
+        public void onSessionStarted(Session castSession, String s) {
+          super.onSessionStarted(castSession, s);
+          String src = "https://dev.acquia.com/sites/default/files/blog/brightcove-logo-horizontal-grey-new.png";
+          BrightcoveChannelUtil.castSplashScreen((CastSession) castSession, new SplashScreen(src));
+        }
+      });
+    }
+
+    super.onCreate(savedInstanceState);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+
+  }
+
+  @Override
+  public void recreate() {
+    super.recreate();
+
+  }
+
+  @Override
+  public void onBackPressed() {
+  //  super.onBackPressed();
+    int orientation = getResources().getConfiguration().orientation;
+
+    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+      recreate();
+
+    } else {
+      super.onBackPressed();
+    }
+  }
+```
 ## API
 
 ### BrightcovePlayer
